@@ -14,7 +14,7 @@ describe 'The docker-compose file works' do
   ]
 
   before(:all) do
-    @test_agent = "puppet_test#{Random.rand(1000)}"
+    @test_agent = "puppet_test#{Random.rand(1000)}.local"
     @timestamps = []
     status = run_command('docker-compose --no-ansi version')[:status]
     if status.exitstatus != 0
