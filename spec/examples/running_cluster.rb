@@ -33,18 +33,18 @@ shared_examples 'a running pupperware cluster' do
   end
 
   it 'should be able to run an agent' do
-    status = run_agent(@test_agent, 'pupperware_default')
+    status = run_agent(@test_agent_fqdn, 'pupperware_default')
     expect(status).to eq(0)
   end
 
   it 'should have a report in puppetdb' do
-    timestamp = check_report(@test_agent)
+    timestamp = check_report(@test_agent_short)
     expect(timestamp).not_to eq('')
     @timestamps << timestamp
   end
 
   it 'should be able to clean a certificate' do
-    status = clean_certificate(@test_agent)
+    status = clean_certificate(@test_agent_short)
     expect(status).to eq(0)
   end
 end
