@@ -373,16 +373,17 @@ module SpecHelpers
     end
   end
 
-  def get_puppetserver_status()
-    curl('localhost', 8140, 'status/v1/simple').body
+  def get_puppetserver_status(port: 8140)
+    curl('localhost', port, 'status/v1/simple').body
   end
 
   # Waits for the `status/v1/simple` endpoint to return 'running'
   # See also: `wait_on_puppetserver_status`
-  def wait_for_puppetserver(timeout: 180)
+  def wait_for_puppetserver(timeout: 180, service_name: 'puppet', port: 8140)
     puts "Waiting for puppetserver to be ready ..."
+    local_port = get_service_base_uri(service_name, port).port
     return retry_block_up_to_timeout(timeout) do
-      get_puppetserver_status == 'running' ? 'running' :
+      get_puppetserver_status(port: local_port) == 'running' ? 'running' :
         raise("puppetserver was not ready after #{timeout} seconds")
     end
   end
