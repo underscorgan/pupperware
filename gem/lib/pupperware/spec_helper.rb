@@ -70,7 +70,7 @@ module SpecHelpers
   def curl(hostname, port, endpoint)
     uri = URI.parse(URI.encode("https://#{hostname}:#{port}/#{endpoint}"))
     request = Net::HTTP::Get.new(uri)
-    request['X-Authentication'] = @rbac_token
+    request['X-Authentication'] = @rbac_token unless @rbac_token.nil?
     req_options = {
       use_ssl: uri.scheme == 'https',
       verify_mode: OpenSSL::SSL::VERIFY_NONE,
