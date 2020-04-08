@@ -657,10 +657,9 @@ LOG
            --env RBAC_PASSWORD=#{rbac_password} \
            --env PUPPETSERVER_HOSTNAME=#{puppetserver} \
            --env PE_CONSOLE_SERVICES_HOSTNAME=#{pe_console_services} \
+           --env PE_ORCHESTRATION_SERVICES_HOSTNAME=#{pe_orchestration_services} \
            #{image} \
-           puppet-job run \
-              --nodes #{target_agent} \
-              --service-url https://#{pe_orchestration_services}:8143/")
+           puppet-job run --nodes #{target_agent}")
   end
 
   ######################################################################
