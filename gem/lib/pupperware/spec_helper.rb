@@ -566,7 +566,7 @@ LOG
     restart_count = get_container_restart_count(container)
     docker_compose("exec -T #{service} pkill #{process}")
 
-    wait_on_container_restart(container: container, prior_count: restart_count)
+    wait_on_container_restart(container: container, prior_count: restart_count, seconds: timeout)
   end
 
   ######################################################################
